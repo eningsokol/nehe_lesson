@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2016.10.17 20:47:19.728,=C:\Users\Ivan Borisenko\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2016.10.17 20:47:19.759,=C:\Users\Ivan Borisenko\Documents\Embarcadero\Studio\Projects\Unit19.cpp</Transaction>
+    <Transaction>2016.10.17 20:47:31.421,E:\BelSU\CG\nehe\cpp\Lesson20\Lesson20.cpp=C:\Users\Ivan Borisenko\Documents\Embarcadero\Studio\Projects\Unit19.cpp</Transaction>
+    <Transaction>2016.10.17 20:47:31.421,E:\BelSU\CG\nehe\cpp\Lesson20\Lesson20.dfm=C:\Users\Ivan Borisenko\Documents\Embarcadero\Studio\Projects\Unit19.dfm</Transaction>
+    <Transaction>2016.10.17 20:47:31.421,E:\BelSU\CG\nehe\cpp\Lesson20\Lesson20.h=C:\Users\Ivan Borisenko\Documents\Embarcadero\Studio\Projects\Unit19.h</Transaction>
+    <Transaction>2016.10.17 20:47:39.107,E:\BelSU\CG\nehe\cpp\Lesson20\Lesson20PCH1.h=C:\Users\Ivan Borisenko\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2016.10.17 20:47:44.374,E:\BelSU\CG\nehe\cpp\Lesson20\Lesson_20.cbproj=C:\Users\Ivan Borisenko\Documents\Embarcadero\Studio\Projects\Project1.cbproj</Transaction>
+  </Transactions>
+</BorlandProject>

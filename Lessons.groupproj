@@ -33,6 +33,36 @@
         <Projects Include="Lesson10\Lesson_10.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="Lesson11\Lesson_11.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Lesson12\Lesson_12.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Lesson13\Lesson_13.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Lesson14\Lesson14.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Lesson15\Lesson_15.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Lesson16\Lesson_16.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Lesson17\Lesson_17.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Lesson18\Lesson_18.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Lesson19\Lesson_19.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Lesson20\Lesson_20.cbproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -131,14 +161,104 @@
     <Target Name="Lesson_10:Make">
         <MSBuild Projects="Lesson10\Lesson_10.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="Lesson_11">
+        <MSBuild Projects="Lesson11\Lesson_11.cbproj"/>
+    </Target>
+    <Target Name="Lesson_11:Clean">
+        <MSBuild Projects="Lesson11\Lesson_11.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Lesson_11:Make">
+        <MSBuild Projects="Lesson11\Lesson_11.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Lesson_12">
+        <MSBuild Projects="Lesson12\Lesson_12.cbproj"/>
+    </Target>
+    <Target Name="Lesson_12:Clean">
+        <MSBuild Projects="Lesson12\Lesson_12.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Lesson_12:Make">
+        <MSBuild Projects="Lesson12\Lesson_12.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Lesson_13">
+        <MSBuild Projects="Lesson13\Lesson_13.cbproj"/>
+    </Target>
+    <Target Name="Lesson_13:Clean">
+        <MSBuild Projects="Lesson13\Lesson_13.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Lesson_13:Make">
+        <MSBuild Projects="Lesson13\Lesson_13.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Lesson14">
+        <MSBuild Projects="Lesson14\Lesson14.cbproj"/>
+    </Target>
+    <Target Name="Lesson14:Clean">
+        <MSBuild Projects="Lesson14\Lesson14.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Lesson14:Make">
+        <MSBuild Projects="Lesson14\Lesson14.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Lesson_15">
+        <MSBuild Projects="Lesson15\Lesson_15.cbproj"/>
+    </Target>
+    <Target Name="Lesson_15:Clean">
+        <MSBuild Projects="Lesson15\Lesson_15.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Lesson_15:Make">
+        <MSBuild Projects="Lesson15\Lesson_15.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Lesson_16">
+        <MSBuild Projects="Lesson16\Lesson_16.cbproj"/>
+    </Target>
+    <Target Name="Lesson_16:Clean">
+        <MSBuild Projects="Lesson16\Lesson_16.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Lesson_16:Make">
+        <MSBuild Projects="Lesson16\Lesson_16.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Lesson_17">
+        <MSBuild Projects="Lesson17\Lesson_17.cbproj"/>
+    </Target>
+    <Target Name="Lesson_17:Clean">
+        <MSBuild Projects="Lesson17\Lesson_17.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Lesson_17:Make">
+        <MSBuild Projects="Lesson17\Lesson_17.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Lesson_18">
+        <MSBuild Projects="Lesson18\Lesson_18.cbproj"/>
+    </Target>
+    <Target Name="Lesson_18:Clean">
+        <MSBuild Projects="Lesson18\Lesson_18.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Lesson_18:Make">
+        <MSBuild Projects="Lesson18\Lesson_18.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Lesson_19">
+        <MSBuild Projects="Lesson19\Lesson_19.cbproj"/>
+    </Target>
+    <Target Name="Lesson_19:Clean">
+        <MSBuild Projects="Lesson19\Lesson_19.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Lesson_19:Make">
+        <MSBuild Projects="Lesson19\Lesson_19.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Lesson_20">
+        <MSBuild Projects="Lesson20\Lesson_20.cbproj"/>
+    </Target>
+    <Target Name="Lesson_20:Clean">
+        <MSBuild Projects="Lesson20\Lesson_20.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Lesson_20:Make">
+        <MSBuild Projects="Lesson20\Lesson_20.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Lesson_1;Lesson_2;Lesson_3;Lesson_4;Lesson_5;Lesson_6;Lesson_7;Lesson_8;Lesson_9;Lesson_10"/>
+        <CallTarget Targets="Lesson_1;Lesson_2;Lesson_3;Lesson_4;Lesson_5;Lesson_6;Lesson_7;Lesson_8;Lesson_9;Lesson_10;Lesson_11;Lesson_12;Lesson_13;Lesson14;Lesson_15;Lesson_16;Lesson_17;Lesson_18;Lesson_19;Lesson_20"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Lesson_1:Clean;Lesson_2:Clean;Lesson_3:Clean;Lesson_4:Clean;Lesson_5:Clean;Lesson_6:Clean;Lesson_7:Clean;Lesson_8:Clean;Lesson_9:Clean;Lesson_10:Clean"/>
+        <CallTarget Targets="Lesson_1:Clean;Lesson_2:Clean;Lesson_3:Clean;Lesson_4:Clean;Lesson_5:Clean;Lesson_6:Clean;Lesson_7:Clean;Lesson_8:Clean;Lesson_9:Clean;Lesson_10:Clean;Lesson_11:Clean;Lesson_12:Clean;Lesson_13:Clean;Lesson14:Clean;Lesson_15:Clean;Lesson_16:Clean;Lesson_17:Clean;Lesson_18:Clean;Lesson_19:Clean;Lesson_20:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Lesson_1:Make;Lesson_2:Make;Lesson_3:Make;Lesson_4:Make;Lesson_5:Make;Lesson_6:Make;Lesson_7:Make;Lesson_8:Make;Lesson_9:Make;Lesson_10:Make"/>
+        <CallTarget Targets="Lesson_1:Make;Lesson_2:Make;Lesson_3:Make;Lesson_4:Make;Lesson_5:Make;Lesson_6:Make;Lesson_7:Make;Lesson_8:Make;Lesson_9:Make;Lesson_10:Make;Lesson_11:Make;Lesson_12:Make;Lesson_13:Make;Lesson14:Make;Lesson_15:Make;Lesson_16:Make;Lesson_17:Make;Lesson_18:Make;Lesson_19:Make;Lesson_20:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

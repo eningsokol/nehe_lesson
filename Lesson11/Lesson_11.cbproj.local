@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2016.10.17 19:59:11.064,=C:\Users\Ivan Borisenko\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2016.10.17 19:59:11.091,=C:\Users\Ivan Borisenko\Documents\Embarcadero\Studio\Projects\Unit11.cpp</Transaction>
+    <Transaction>2016.10.17 19:59:31.165,E:\BelSU\CG\nehe\шаблон\Unit11.h=C:\Users\Ivan Borisenko\Documents\Embarcadero\Studio\Projects\Unit11.h</Transaction>
+    <Transaction>2016.10.17 19:59:31.165,E:\BelSU\CG\nehe\шаблон\Unit11.cpp=C:\Users\Ivan Borisenko\Documents\Embarcadero\Studio\Projects\Unit11.cpp</Transaction>
+    <Transaction>2016.10.17 19:59:31.165,E:\BelSU\CG\nehe\шаблон\Unit11.dfm=C:\Users\Ivan Borisenko\Documents\Embarcadero\Studio\Projects\Unit11.dfm</Transaction>
+    <Transaction>2016.10.17 19:59:39.015,E:\BelSU\CG\nehe\шаблон\Project1PCH1.h=C:\Users\Ivan Borisenko\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2016.10.17 19:59:42.016,E:\BelSU\CG\nehe\шаблон\Project1.cbproj=C:\Users\Ivan Borisenko\Documents\Embarcadero\Studio\Projects\Project1.cbproj</Transaction>
+    <Transaction>2016.10.17 20:01:07.859,E:\BelSU\CG\nehe\cpp\Lesson11\Lesson11.dfm=E:\BelSU\CG\nehe\шаблон\Unit11.dfm</Transaction>
+    <Transaction>2016.10.17 20:01:07.859,E:\BelSU\CG\nehe\cpp\Lesson11\Lesson11.h=E:\BelSU\CG\nehe\шаблон\Unit11.h</Transaction>
+    <Transaction>2016.10.17 20:01:07.859,E:\BelSU\CG\nehe\cpp\Lesson11\Lesson11.cpp=E:\BelSU\CG\nehe\шаблон\Unit11.cpp</Transaction>
+    <Transaction>2016.10.17 20:01:26.042,E:\BelSU\CG\nehe\cpp\Lesson11\Lesson_11PCH1.h=E:\BelSU\CG\nehe\шаблон\Project1PCH1.h</Transaction>
+    <Transaction>2016.10.17 20:01:26.134,E:\BelSU\CG\nehe\cpp\Lesson11\Lesson_11.cbproj=E:\BelSU\CG\nehe\шаблон\Project1.cbproj</Transaction>
+  </Transactions>
+</BorlandProject>
