@@ -1,4 +1,5 @@
 //---------------------------------------------------------------------------
+#pragma comment (lib, "SOIL.lib")       // x32 - SOIL.a, x32 - SOIL.lib
 
 #include <tchar.h>
 #include <vcl.h>
@@ -7,13 +8,9 @@
 #include <stdio.h>      // Header file for standard Input/Output
 #include <gl\gl.h>      // Header file for the OpenGL32 library
 #include <gl\glu.h>     // Header file for the GLu32 library
-#include <gl\glaux.h>   // Header file for the GLaux library
+#include "SOIL.h"
 #pragma hdrstop
-#pragma comment (lib, "glaux.lib")
 //---------------------------------------------------------------------------
-USEFORM("Lesson12.cpp", Form11);
-//---------------------------------------------------------------------------
-
 #pragma argsused
 
 HGLRC hRC = NULL;               // Permanent rendering context
@@ -99,59 +96,26 @@ GLvoid BuildLists()
 	glEndList();
 }
 
-AUX_RGBImageRec *LoadBMP(char *Filename)        // Loads a bitmap image
+int LoadGLTextures()                                    // Load Bitmaps And Convert To Textures
 {
-	FILE *File = NULL;              // File handle
+	/* load an image file directly as a new OpenGL texture */
+	texture[0] = SOIL_load_OGL_texture
+		(
+		"../../Data/Cube.bmp",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_INVERT_Y
+		);
 
-	if (!Filename)		        // Make sure a filename was given
-	{
-		return NULL;	        // If not return NULL
-	}
+	if(texture[0] == 0)
+		return false;
 
-	File = fopen(Filename,"r");	// Check to see if the file exists
+    // Typical Texture Generation Using Data From The Bitmap
+    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
-	if (File)			// Does the file exist?
-	{
-		fclose(File);		// Close the handle
-		return auxDIBImageLoad(Filename);       // Load the bitmap and return a pointer
-	}
-
-	return NULL;                    // If load failed return NULL
-}
-
-int LoadGLTextures()    // Load bitmaps and convert to textures
-{
-	int Status = false;     // Status indicator
-
-	AUX_RGBImageRec *TextureImage[1];               // Create storage space for the texture
-
-	memset(TextureImage,0,sizeof(void *)*1);        // Set the pointer to NULL
-
-	// Load the bitmap, check for errors, if bitmap's not found quit
-	if (TextureImage[0]=LoadBMP("Data/Cube.bmp"))
-	{
-		Status = true;				// Set the status yo TRUE
-
-		glGenTextures(1, &texture[0]);		// Create the texture
-
-		// Typical texture generation using data from the bitmap
-		glBindTexture(GL_TEXTURE_2D, texture[0]);
-		glTexImage2D(GL_TEXTURE_2D, 0, 3, TextureImage[0]->sizeX, TextureImage[0]->sizeY, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureImage[0]->data);
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-	}
-
-	if (TextureImage[0])			// If texture exists
-	{
-		if (TextureImage[0]->data)	// If texture image exists
-		{
-			free(TextureImage[0]->data);	// Free the texture image memory
-		}
-
-		free(TextureImage[0]);			// Free the image structure
-	}
-
-	return Status;				// Return the status
+    return true;                                        // Return Success
 }
 
 GLvoid ReSizeGLScene(GLsizei width, GLsizei height)     // Resize and initialize the GL window

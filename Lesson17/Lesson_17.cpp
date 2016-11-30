@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-
+#pragma comment (lib, "SOIL.a")       // x32 - SOIL.a, x32 - SOIL.lib
 #include <tchar.h>
 #include <vcl.h>
 #include <windows.h>    // Header file for windows
@@ -7,9 +7,8 @@
 #include <stdio.h>      // Header file for standard Input/Output
 #include <gl\gl.h>      // Header file for the OpenGL32 library
 #include <gl\glu.h>     // Header file for the GLu32 library
-#include <gl\glaux.h>   // Header file for the GLaux library
+#include "SOIL.h"
 #pragma hdrstop
-#pragma comment (lib, "glaux.lib")
 //---------------------------------------------------------------------------
 USEFORM("Lesson17.cpp", Form16);
 //---------------------------------------------------------------------------
@@ -34,59 +33,36 @@ GLfloat	cnt2;			// 2nd counter used to move text & for coloring
 
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);   // Declaration for WndProc
 
-AUX_RGBImageRec *LoadBMP(char *Filename)        // Loads a bitmap image
+int LoadGLTextures()                                    // Load Bitmaps And Convert To Textures
 {
-	FILE *File = NULL;              // File handle
+	/* load an image file directly as a new OpenGL texture */
+	texture[0] = SOIL_load_OGL_texture
+		(
+		"../../Data/Font.bmp",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_INVERT_Y
+		);
+	texture[1] = SOIL_load_OGL_texture
+		(
+		"../../Data/Bumps.bmp",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_INVERT_Y
+		);
+	if(texture[0] == 0 || texture[1] == 0)
+		return false;
 
-	if (!Filename)		        // Make sure a filename was given
-	{
-		return NULL;	        // If not return NULL
-	}
+	// Typical Texture Generation Using Data From The Bitmap
+	glBindTexture(GL_TEXTURE_2D, texture[0]);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
-	File = fopen(Filename,"r");	// Check to see if the file exists
+	glBindTexture(GL_TEXTURE_2D, texture[1]);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
-	if (File)			// Does the file exist?
-	{
-		fclose(File);		// Close the handle
-		return auxDIBImageLoad(Filename);       // Load the bitmap and return a pointer
-	}
-
-	return NULL;                    // If load failed return NULL
-}
-
-int LoadGLTextures()                                    // Load bitmaps and convert to textures
-{
-        int Status = false;                             // Status indicator
-        AUX_RGBImageRec *TextureImage[2];               // Create storage space for the textures
-        memset(TextureImage,0,sizeof(void *)*2);        // Set the pointer to NULL
-
-        if ((TextureImage[0] = LoadBMP("Data/Font.bmp")) &&
-			(TextureImage[1] = LoadBMP("Data/Bumps.bmp")))
-        {
-                Status = true;                          // Set the status to TRUE
-                glGenTextures(2, &texture[0]);          // Create two texture
-
-                for (loop = 0; loop < 2; loop++)
-                {
-	                glBindTexture(GL_TEXTURE_2D, texture[loop]);
-                        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-                        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-                        glTexImage2D(GL_TEXTURE_2D, 0, 3, TextureImage[loop]->sizeX, TextureImage[loop]->sizeY, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureImage[loop]->data);
-                }
-        }
-
-	for (loop = 0; loop < 2; loop++)
-	{
-	        if (TextureImage[loop])					// If texture exists
-                {
-		        if (TextureImage[loop]->data)			// If texture image exists
-                        {
-                                free(TextureImage[loop]->data);         // Free the texture image memory
-                        }
-                        free(TextureImage[loop]);			// Free the image structure
-		}
-	}
-        return Status;          // Return the status
+    return true;                                        // Return Success
 }
 
 GLvoid BuildFont(void)        // Build our font display list

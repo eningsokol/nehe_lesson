@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-
+#pragma comment (lib, "SOIL.lib")       // x32 - SOIL.a, x32 - SOIL.lib
 #include <tchar.h>
 #include <vcl.h>
 #include <windows.h>    // Header file for windows
@@ -7,9 +7,8 @@
 #include <stdio.h>      // Header file for standard Input/Output
 #include <gl\gl.h>      // Header file for the OpenGL32 library
 #include <gl\glu.h>     // Header file for the GLu32 library
-#include <gl\glaux.h>   // Header file for the GLaux library
+#include "SOIL.h"
 #pragma hdrstop
-#pragma comment (lib, "glaux.lib")
 //---------------------------------------------------------------------------
 USEFORM("Lesson20.cpp", Form19);
 //---------------------------------------------------------------------------
@@ -33,7 +32,7 @@ GLuint texture[5];		// Storage for our five textures
 GLuint loop;			// Generic loop variable
 GLfloat	roll;			// Rolling texture
 
-AUX_RGBImageRec *LoadBMP(char *Filename)                // Loads a bitmap image
+/*AUX_RGBImageRec *LoadBMP(char *Filename)                // Loads a bitmap image
 {
         FILE *File = NULL;                              // File handle
         if (!Filename)                                  // Make sure a filename was given
@@ -55,11 +54,11 @@ int LoadGLTextures()                                    // Load bitmaps and conv
         AUX_RGBImageRec *TextureImage[5];               // Create storage space for the textures
         memset(TextureImage,0,sizeof(void *)*5);        // Set the pointer to NULL
 
-        if ((TextureImage[0] = LoadBMP("Data/logo.bmp")) &&             // Logo texture
-			(TextureImage[1]=LoadBMP("Data/mask1.bmp")) &&	// First mask
-			(TextureImage[2]=LoadBMP("Data/image1.bmp")) &&	// First image
-			(TextureImage[3]=LoadBMP("Data/mask2.bmp")) &&	// Second mask
-			(TextureImage[4]=LoadBMP("Data/image2.bmp")))	// Second image
+		if ((TextureImage[0] = LoadBMP("../../Data/logo.bmp")) &&             // Logo texture
+			(TextureImage[1]=LoadBMP("../../Data/mask1.bmp")) &&	// First mask
+			(TextureImage[2]=LoadBMP("../../Data/image1.bmp")) &&	// First image
+			(TextureImage[3]=LoadBMP("../../Data/mask2.bmp")) &&	// Second mask
+			(TextureImage[4]=LoadBMP("../../Data/image2.bmp")))	// Second image
         {
                 Status = true;                          // Set the status to TRUE
                 glGenTextures(5, &texture[0]);          // Create five textures
@@ -86,8 +85,56 @@ int LoadGLTextures()                                    // Load bitmaps and conv
 	}
 
         return Status;                                          // Return the status
-}
+} */
+int LoadGLTextures()                                    // Load Bitmaps And Convert To Textures
+{
+	/* load an image file directly as a new OpenGL texture */
+	texture[0] = SOIL_load_OGL_texture
+		(
+		"../../Data/logo.bmp",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_INVERT_Y
+		);
+	texture[1] = SOIL_load_OGL_texture
+		(
+		"../../Data/mask1.bmp",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_INVERT_Y
+		);
+	texture[2] = SOIL_load_OGL_texture
+		(
+		"../../Data/image1.bmp",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_INVERT_Y
+		);
+	texture[3] = SOIL_load_OGL_texture
+		(
+		"../../Data/mask2.bmp",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_INVERT_Y
+		);
+	texture[4] = SOIL_load_OGL_texture
+		(
+		"../../Data/image2.bmp",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_INVERT_Y
+		);
 
+	if(texture[0] == 0 || texture[1] == 0 || texture[2] == 0 || texture[3] == 0 || texture[4] == 0)
+		return false;
+	// Typical Texture Generation Using Data From The Bitmap
+	for (GLuint i = 0; i < 5; i++) {
+		glBindTexture(GL_TEXTURE_2D, texture[i]);
+		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+	}
+    return true;                                        // Return Success
+}
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);   // Declaration for WndProc
 
 GLvoid ReSizeGLScene(GLsizei width, GLsizei height)     // Resize and initialize the GL window

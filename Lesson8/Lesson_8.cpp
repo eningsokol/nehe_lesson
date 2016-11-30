@@ -1,6 +1,5 @@
 //---------------------------------------------------------------------------
-
-
+#pragma comment (lib, "SOIL.a")       // x32 - SOIL.a, x32 - SOIL.lib
 #include <tchar.h>
 
 #include <vcl.h>
@@ -8,13 +7,10 @@
 #include <stdio.h>      // Header file for standard Input/Output ( ADD )
 #include <gl\gl.h>      // Header file for the OpenGL32 library
 #include <gl\glu.h>     // Header file for the GLu32 library
-#include <gl\glaux.h>   // Header file for the GLaux library
+#include "SOIL.h"
 #pragma hdrstop
-#pragma comment (lib, "glaux.lib")
-//---------------------------------------------------------------------------
-USEFORM("Lesson8.cpp", Form8);
-//---------------------------------------------------------------------------
 
+//---------------------------------------------------------------------------
 #pragma argsused
 
 HGLRC hRC = NULL;               // Permanent rendering context
@@ -48,73 +44,47 @@ bool bp;			// B pressed? ( NEW )
 
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);   // Declaration for WndProc
 
-AUX_RGBImageRec *LoadBMP(char *Filename)        // Loads a bitmap image
+int LoadGLTextures()                                    // Load Bitmaps And Convert To Textures
 {
-	FILE *File = NULL;              // File handle
+    /* load an image file directly as a new OpenGL texture */
+	texture[0] = SOIL_load_OGL_texture
+		(
+		"../../Data/Glass.bmp",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_INVERT_Y
+		);
+	texture[1] = SOIL_load_OGL_texture
+		(
+		"../../Data/Glass.bmp",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_INVERT_Y
+		);
+	texture[2] = SOIL_load_OGL_texture
+		(
+		"../../Data/Glass.bmp",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
+		);
 
-	if (!Filename)		        // Make sure a filename was given
-	{
-		return NULL;	        // If not return NULL
-	}
+	if(texture[0] == 0 || texture[1] == 0 || texture[2] == 0 )
+		return false;
+    // Typical Texture Generation Using Data From The Bitmap
+	glBindTexture(GL_TEXTURE_2D, texture[0]);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
 
-	File = fopen(Filename,"r");	// Check to see if the file exists
+	glBindTexture(GL_TEXTURE_2D, texture[1]);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
-	if (File)			// Does the file exist?
-	{
-		fclose(File);		// Close the handle
-		return auxDIBImageLoad(Filename);       // Load the bitmap and return a pointer
-	}
-
-	return NULL;                    // If load failed return NULL
+	glBindTexture(GL_TEXTURE_2D, texture[2]);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_NEAREST);
+	return true;                                        // Return Success
 }
-
-int LoadGLTextures()    // Load bitmaps and convert to textures
-{
-	int Status = false;     // Status indicator
-
-	AUX_RGBImageRec *TextureImage[1];       // Create storage space for the texture
-
-	memset(TextureImage,0,sizeof(void *)*1);        // Set the pointer to NULL
-
-	// Load the bitmap, check for errors, if bitmap's not found quit
-	if (TextureImage[0] = LoadBMP("Data/glass.bmp"))
-	{
-		Status = true;    // Set The Status To TRUE
-
-		glGenTextures(3, &texture[0]);  // Create three textures
-
-		// Create nearest filtered texture
-		glBindTexture(GL_TEXTURE_2D, texture[0]);
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
-		glTexImage2D(GL_TEXTURE_2D, 0, 3, TextureImage[0]->sizeX, TextureImage[0]->sizeY, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureImage[0]->data);
-
-		// Create linear filtered texture
-		glBindTexture(GL_TEXTURE_2D, texture[1]);
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0, 3, TextureImage[0]->sizeX, TextureImage[0]->sizeY, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureImage[0]->data);
-
-		// Create mipmapped texture
-		glBindTexture(GL_TEXTURE_2D, texture[2]);
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_NEAREST);
-		gluBuild2DMipmaps(GL_TEXTURE_2D, 3, TextureImage[0]->sizeX, TextureImage[0]->sizeY, GL_RGB, GL_UNSIGNED_BYTE, TextureImage[0]->data);
-	}
-
-	if (TextureImage[0])			// If texture exists
-	{
-		if (TextureImage[0]->data)	// If texture image exists
-		{
-			free(TextureImage[0]->data);	// Free the texture image memory
-		}
-
-		free(TextureImage[0]);			// Free the image structure
-	}
-
-	return Status;				// Return the status						// Return The Status
-}
-
 GLvoid ReSizeGLScene(GLsizei width, GLsizei height)     // Resize and initialize the GL window
 {
         if (height == 0)                        // Prevent A Divide By Zero By
@@ -574,19 +544,19 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 				}
 				if (keys[VK_UP])
 				{
-					xspeed -= 0.01f;
+					xspeed -= 0.0001f;
 				}
 				if (keys[VK_DOWN])
 				{
-					xspeed += 0.01f;
+					xspeed += 0.0001f;
 				}
 				if (keys[VK_RIGHT])
 				{
-					yspeed += 0.01f;
+					yspeed += 0.0001f;
 				}
 				if (keys[VK_LEFT])
 				{
-					yspeed -= 0.01f;
+					yspeed -= 0.0001f;
 				}
 
                                 if (keys['B'] && !bp)				// Is B key pressed and bp FALSE?
