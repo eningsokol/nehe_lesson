@@ -75,7 +75,7 @@ void SetupWorld()
 	int numtriangles;
 	FILE *filein;
 	char oneline[255];
-	filein = fopen("data/world.txt", "rt");	        // File to load world data from
+	filein = fopen("../../Data/world.txt", "rt");	        // File to load world data from
 
 	readstr(filein,oneline);
 	sscanf(oneline, "NUMPOLLIES %d\n", &numtriangles);
