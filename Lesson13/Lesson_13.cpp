@@ -12,9 +12,6 @@
 #include <gl\glaux.h>   // Header file for the GLaux library
 #pragma hdrstop
 //---------------------------------------------------------------------------
-USEFORM("Lesson13.cpp", Form12);
-//---------------------------------------------------------------------------
-
 #pragma argsused
 
 HGLRC hRC = NULL;               // Permanent rendering context

@@ -12,9 +12,6 @@
 #pragma hdrstop
 #define	MAX_PARTICLES	1000    // Number of particles to create ( NEW )
 //---------------------------------------------------------------------------
-USEFORM("Lesson19.cpp", Form18);
-//---------------------------------------------------------------------------
-
 #pragma argsused
 
 HGLRC hRC = NULL;               // Permanent rendering context

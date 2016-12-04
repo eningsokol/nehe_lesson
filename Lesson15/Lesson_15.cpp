@@ -11,9 +11,6 @@
 #include "SOIL.h"
 #pragma hdrstop
 //---------------------------------------------------------------------------
-USEFORM("Lesson15.cpp", Form14);
-//---------------------------------------------------------------------------
-
 #pragma argsused
 
 HGLRC hRC = NULL;               // Permanent rendering context

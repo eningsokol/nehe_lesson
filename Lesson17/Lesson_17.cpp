@@ -10,9 +10,6 @@
 #include "SOIL.h"
 #pragma hdrstop
 //---------------------------------------------------------------------------
-USEFORM("Lesson17.cpp", Form16);
-//---------------------------------------------------------------------------
-
 #pragma argsused
 
 HGLRC hRC = NULL;               // Permanent rendering context
