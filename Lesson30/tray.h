@@ -68,7 +68,7 @@ class TRay
 
 		static TRay &invert(const TRay &r, TRay &result) { result._P = r._P; TVector::invert(r._V, result._V); return result; }
 
-		TRay operator-() const { return invert(*this, TRay()); }
+		//TRay operator-() const { return invert(*this, TRay()); }
 
 
 

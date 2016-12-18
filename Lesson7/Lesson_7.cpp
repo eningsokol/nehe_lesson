@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
-#pragma comment (lib, "SOIL.a")       // x32 - SOIL.a, x32 - SOIL.lib
 #include <tchar.h>
+#pragma comment (lib, "SOIL.lib")       // x32 - SOIL.a, x32 - SOIL.lib
 
 #include <vcl.h>
 #include <windows.h>    // Header file for windows

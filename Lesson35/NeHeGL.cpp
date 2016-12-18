@@ -3,7 +3,8 @@
 #include <windows.h>
 #include <gl\gl.h>	// Header file for the OpenGL32 library
 #include <gl\glu.h>	// Header file for the GLu32 library
-#include <vfw.h>	// Header file for video for windows
+//#include <vfw.h>	// Header file for video for windows
+#include "vfw_BCB.hpp"
 #include "NeHeGL.h"	// Header file for NeHeGL
 #pragma hdrstop
 
@@ -60,17 +61,7 @@ void flipIt(void* buffer)	// Flips the red and blue bytes (256x256)
 			add rdi,3		// Moves through the data by 3 bytes
 			dec rsi			// Decreases our loop counter
 			jnz label		// If not zero jump back to label
-    }
-	/*__asm mov rcx, 256*256;
-	__asm mov rbx, b;
-	__asm label: ;
-	__asm mov al,[rbx+0];
-	__asm mov ah,[rbx+2];
-	__asm mov [rbx+2],al;
-	__asm mov [rbx+0],ah;
-	__asm add rbx,3;
-	__asm dec rcx;
-	__asm jnz label;  */
+	}
 	/*__asm			// Assembler code to follow
 	{
 		mov ecx, 256*256        	// Counter set to dimensions of our memory block
@@ -83,7 +74,7 @@ void flipIt(void* buffer)	// Flips the red and blue bytes (256x256)
 			add ebx,3		// Moves through the data by 3 bytes
 			dec ecx			// Decreases our loop counter
 			jnz label		// If not zero jump back to label
-	}     */
+	}    */
 }
 
 void OpenAVI(LPCSTR szFile)	// Opens an AVI file (szFile)

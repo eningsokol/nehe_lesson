@@ -136,7 +136,7 @@ class TVector {
 
 		// Vector arithmetic, addition, subtraction and vector product
 
-		TVector operator-() const { return invert(*this, TVector()); }
+		//TVector operator-() const { return invert(*this, TVector()); }
 
 		TVector &operator+=(const TVector &v) { return add(*this, v, *this); }
 

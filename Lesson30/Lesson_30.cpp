@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-
+#include <vcl.h>
 #include <windows.h>    // Header file for windows
 #include <math.h>	// Header file for math library routines
 #include <stdio.h>	// Header file for standard I/O routines
@@ -945,7 +945,7 @@ void idle()
 
 					  rt2=ArrayVel[BallNr].mag();
 					  ArrayVel[BallNr].unit();
-					  ArrayVel[BallNr]=TVector::unit( (normal*(2*normal.dot(-ArrayVel[BallNr]))) + ArrayVel[BallNr] );
+					  //ArrayVel[BallNr]=TVector::unit( (normal*(2*normal.dot(-ArrayVel[BallNr]))) + ArrayVel[BallNr] );
 					  ArrayVel[BallNr]=ArrayVel[BallNr]*rt2;
 
 					  // Update explosion array
